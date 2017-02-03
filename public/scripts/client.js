@@ -1,14 +1,29 @@
-app = angular.module('myApp', []);
+var app = angular.module('myApp', []);
+
 
 app.controller('GifController', function (GifGetter){
   console.log("connected?");
 
 var vm =this;
 
-GifGetter.randomGif().then(function (res){
-  console.log("from the controller", res);
+vm.searchQuery = '';
 
-  vm.randomGifUrl = res.data.image_url;
+vm.randomGif = function (){
+  GifGetter.randomGif().then(function (res){
+    console.log("from the controller", res);
+//set url for tag:
+    vm.randomGifUrl = res.data.image_url;
+
 });
+}
+vm.searchGif= function (searchQuery){
+  //searching gif
+  GifGetter.searchGif(vm.searchQuery).then(function (res){
+    console.log("searchGif", res);
+    //store array of gifs in searchGifUrl
+    vm.searchGifUrl = res.data;
+
+  })
+}
 
 });

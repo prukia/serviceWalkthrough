@@ -9,9 +9,14 @@
   </head>
   <body ng-app="myApp">
   <main ng-controller="GifController as vm">
+      <input type="submit" name="random" value="Get a Random" ng-click="vm.randomGif()" />
     <img ng-src="{{vm.randomGifUrl}}" />
 
-
+    <h2>search!</h2>
+    <input ng-model="vm.searchQuery" type="text" />
+    <input type="submit" name="search" value="CLICK FOR GIFS" ng-click="vm.searchGif(vm.searchQuery)" />
+      <input type="submit" name="beyonce" value="CLICK FOR Bey" ng-click="vm.searchGif('beyonce')" />
+      <img ng-repeat="gifs in vm.searchGifUrl" ng-show="vm.searchGifUrl" ng-src={{gifs.images.original.url}} />
 
 
   </main>
